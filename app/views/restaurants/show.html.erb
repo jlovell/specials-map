@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @restaurant.name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @restaurant.address %>
+</p>
+
+<p>
+  <b>Latitude:</b>
+  <%= @restaurant.latitude %>
+</p>
+
+<p>
+  <b>Longitude:</b>
+  <%= @restaurant.longitude %>
+</p>
+
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=15&markers=#{@restaurant.latitude}%2C#{@restaurant.longitude}" %>
+<br>
+
+
+<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
+<%= link_to 'Back', restaurants_path %>

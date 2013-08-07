@@ -1,0 +1,33 @@
+
+<% cur_location = [@location[:latitude], @location[:longitude]] %>
+<% nearbys = Restaurant.near( cur_location, 0.5) %>
+
+<table class="table-striped table-bordered">
+	<tr>
+		<th>Name</th>
+		<th>Address</th>
+		<th>Direction</th>
+		<th>Food</th>
+		<th>Drink</th>
+	</tr>
+	<% nearbys.each do |place| %>
+	<tr>
+		<td><%= place.name %></td>
+		<td><%= place.address[0,place.address.index(',')] %></td>
+		<td>
+			<i class="icon-arrow-down" style="display:inline-block;-webkit-transform:rotate(<%= place.bearing_to(cur_location).to_f %>deg);"></i>
+			<%= place.distance_to(cur_location).to_f.round(2) %> mi
+		</td>
+		<% special = place.specials.find{ |x| x[:day] == Time.now.wday } %>
+		<td class="food"><%= special.food if special %></td>
+		<td class="drink"><%= special.drink if special %></td>
+
+	</tr>
+<% end %>
+<table>
+<% markers = "" %>
+<% nearbys.each { |place| markers << "&markers=color:green%7C#{place[:latitude]},#{place[:longitude]}"} %>
+
+<div id="map">
+	<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@location[:latitude]},#{@location[:longitude]}&zoom=15&size=640x400&maptype=roadmap&markers=color:blue%7C#{@location[:latitude]},#{@location[:longitude]}#{markers}&sensor=false" %>
+</div>

@@ -1,4 +1,12 @@
 SpecialMap::Application.routes.draw do
+  resources :specials
+  root :to => "home#location"
+
+  match "/nearby" => "home#nearby", as: "nearby"
+
+  resources :restaurants
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

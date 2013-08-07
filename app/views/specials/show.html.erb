@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Day:</b>
+  <%= @special.day %>
+</p>
+
+<p>
+  <b>Food:</b>
+  <%= @special.food %>
+</p>
+
+<p>
+  <b>Drink:</b>
+  <%= @special.drink %>
+</p>
+
+<p>
+  <b>Event:</b>
+  <%= @special.event %>
+</p>
+
+
+<%= link_to 'Edit', edit_special_path(@special) %> |
+<%= link_to 'Back', specials_path %>

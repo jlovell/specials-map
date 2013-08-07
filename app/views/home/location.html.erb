@@ -1,0 +1,38 @@
+<script>
+  function doGeolocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
+    } else {
+      positionError(-1);
+    }
+  }
+
+  function positionError(err) {
+    var msg;
+    switch(err.code) {
+      case err.UNKNOWN_ERROR:
+        msg = "Unable to find your location";
+        break;
+      case err.PERMISSION_DENINED:
+        msg = "Permission denied in finding your location";
+        break;
+      case err.POSITION_UNAVAILABLE:
+        msg = "Your location is currently unknown";
+        break;
+      case err.BREAK:
+        msg = "Attempt to find location took too long";
+        break;
+      default:
+        msg = "Location detection not supported in browser";
+    }
+    document.getElementById('info').innerHTML = msg;
+  }
+
+  function positionSuccess(position) {
+    // Centre the map on the new location
+    var coords = position.coords || position.coordinate || position;
+    window.location.href =  'nearby' + '?latitude=' + coords.latitude + '&longitude=' + coords.longitude
+  }
+</script>
+
+
