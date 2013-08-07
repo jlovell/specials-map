@@ -1,22 +1,29 @@
 
 <% cur_location = [@location[:latitude], @location[:longitude]] %>
-<% nearbys = Restaurant.near( cur_location, 0.16) %>
+<% nearbys = Restaurant.near( cur_location, 0.4) %>
+<% nearbys = Restaurant.near( cur_location, 0.3) if nearbys.length > 25 %>
+<% nearbys = Restaurant.near( cur_location, 0.5) if nearbys.length < 10 %>
 
+
+<div id="refresh"><%= link_to "Refresh Location", root_path %></div>
 <table class="table-striped table-bordered">
 	<tr>
-		<th>Name</th>
-		<th>Address</th>
+		<th>Restaurant</th>
 		<th>Direction</th>
 		<th>Food</th>
 		<th>Drink</th>
 	</tr>
 	<% nearbys.each do |place| %>
 	<tr>
-		<td><%= place.name %></td>
-		<td><%= place.address[0,place.address.index(',')] %></td>
+		<td>
+			<strong><%= place.name %></strong><br>
+			<%= place.address[0,place.address.index(',')] %>
+			</td>
 		<td>
 			<i class="icon-arrow-down" style="display:inline-block;-webkit-transform:rotate(<%= place.bearing_to(cur_location).to_f %>deg);"></i>
-			<%= place.distance_to(cur_location).to_f.round(2) %> mi
+			<a href="#map" onclick="$('img').attr('src', $('img').attr('src').replace(/green%7C<%= place.latitude %>/g, 'red%7C<%= place.latitude %>'));">
+				<%= place.distance_to(cur_location).to_f.round(2) %> mi
+			</a>
 		</td>
 		<% special = place.specials.find{ |x| x[:day] == Time.now.wday } %>
 		<td class="food"><%= special.food if special %></td>
@@ -29,5 +36,5 @@
 <% nearbys.each { |place| markers << "&markers=color:green%7C#{place[:latitude]},#{place[:longitude]}"} %>
 
 <div id="map">
-	<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@location[:latitude]},#{@location[:longitude]}&zoom=15&size=640x400&maptype=roadmap&markers=color:blue%7C#{@location[:latitude]},#{@location[:longitude]}#{markers}&sensor=false" %>
+	<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@location[:latitude]},#{@location[:longitude]}&zoom=16&size=640x500&maptype=roadmap&markers=color:blue%7C#{@location[:latitude]},#{@location[:longitude]}#{markers}&sensor=false" %>
 </div>

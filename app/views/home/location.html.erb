@@ -1,7 +1,7 @@
 <script>
   function doGeolocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
+      navigator.geolocation.getCurrentPosition(positionSuccess, positionError, {enableHighAccuracy:true } );
     } else {
       positionError(-1);
     }

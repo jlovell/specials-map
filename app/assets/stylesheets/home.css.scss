@@ -2,11 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+	padding-top: 40px;
+}
+div#refresh {
+	margin: 0 auto;
+	display: block;
+	text-align: center;
+}
 table {
 	max-width: 1300px;
-	margin: 50px auto;
+	margin: 0 auto;
+	th {
+		padding: 10px;
+	}
 	td {
-		padding: 5px;
+		padding: 8px 5px;
 		&.food {
 			width: 200px;
 		}
@@ -14,9 +25,13 @@ table {
 			width: 500px;
 		}
 	}
+	a, a:visited, a:hover {
+		color: #333;
+		background-color: transparent;
+	}
 }
 
 div#map {
 	width: 640px;
-	margin: 0 auto;
+	margin: 30px auto;
 }
