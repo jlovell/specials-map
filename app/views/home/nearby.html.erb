@@ -3,6 +3,7 @@
 <% nearbys = Restaurant.near( cur_location, 0.4) %>
 <% nearbys = Restaurant.near( cur_location, 0.3) if nearbys.length > 25 %>
 <% nearbys = Restaurant.near( cur_location, 0.5) if nearbys.length < 10 %>
+<% nearbys = Restaurant.near( cur_location, 0.7) if nearbys.length < 10 %>
 
 
 <div id="refresh"><%= link_to "Refresh Location", root_path %></div>
