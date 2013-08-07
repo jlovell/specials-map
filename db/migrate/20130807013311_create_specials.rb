@@ -2,9 +2,9 @@ class CreateSpecials < ActiveRecord::Migration
   def change
     create_table :specials do |t|
       t.integer :day
-      t.string :food
-      t.string :drink
-      t.string :event
+      t.text :food
+      t.text :drink
+      t.text :event
       t.integer :restaurant_id
 
       t.timestamps
