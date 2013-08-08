@@ -3,6 +3,7 @@ SpecialMap::Application.routes.draw do
   root :to => "home#location"
 
   match "/nearby" => "home#nearby", as: "nearby"
+  match "/mobile" => "home#mobile", as: "mobile"
 
   resources :restaurants
 
