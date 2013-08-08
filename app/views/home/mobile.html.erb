@@ -19,8 +19,8 @@
 			<%= place.distance_to(cur_location).to_f.round(2) %> mi
 		</span>
 		<% special = place.specials.find{ |x| x[:day] == Time.now.wday } %>
-		<%= content_tag( :span, special.food, class: "m-food" )   if !special.food.empty? %>
-		<%= content_tag( :span, special.drink, class: "m-drink" ) if !special.drink.empty? %>
-		<%= content_tag( :span, special.event, class: "m-event" ) if !special.event.empty? %>
+		<%= content_tag( :span, special.food, class: "m-food" )   if nonempty(special.food) %>
+		<%= content_tag( :span, special.drink, class: "m-drink" ) if nonempty(special.drink) %>
+		<%= content_tag( :span, special.event, class: "m-event" ) if nonempty(special.event) %>
 	</div>
 <% end %>
